@@ -108,6 +108,10 @@ const display = (function(board){
 })(board);
 
 display.drawGrid();
+const Player = function(name, symbol, human=true, score=0) {
+  return {name, symbol, human, score}
+}
+
 
 const controls = (function (game) {
   const squares = document.querySelectorAll(".square");
