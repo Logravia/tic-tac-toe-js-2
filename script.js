@@ -3,7 +3,7 @@
 // and whether victory or tie been achieved
 const board = (function () {
   const generateBoard = function () {
-    return [["X", null, null],
+    return [[null, null, null],
     [null, null, null],
     [null, null, null]];
   }
@@ -81,33 +81,46 @@ const board = (function () {
     return noBlanks() && !isVictory();
   };
 
-  return { putSymbol, clear, state, isTie, isVictory}
+  return { putSymbol, clear, state, isTie, isVictory, isLegal}
 })();
 
+//draws and clear tic-tac-toe grid based on board.state
 const display = (function(board){
-  htmlGameboard = document.querySelector(".gameboard");
+  const htmlGameboard = document.querySelector(".gameboard");
+  let squares = null;
 
   const drawGrid = function(){
+    squares = [];
     for (let y = 0; y < board.state.length; y++) {
       for (let x = 0; x < board.state[y].length; x++) {
-        sqr = document.createElement("div");
-        sqr.innerHTML = board.state[y][x];
+        sqr = document.createElement("button");
         sqr.setAttribute("x", x);
         sqr.setAttribute("y", y);
+        sqr.className = "square";
+        squares.push(sqr);
         htmlGameboard.appendChild(sqr);
       }
     }
+  }
+
+  drawGrid();
+
+  const updateSquares = function () {
+    squares.forEach(square=>{
+      let x = Number(square.getAttribute("x"));
+      let y = Number(square.getAttribute("y"));
+      square.innerHTML = board.state[y][x];
+    })
   }
 
   const clear = function() {
     htmlGameboard.replaceChildren();
   }
 
-  return {drawGrid, clear}
+  return {drawGrid, clear, updateSquares}
 
 })(board);
 
-display.drawGrid();
 const Player = function(name, symbol, human=true, score=0) {
   return {name, symbol, human, score}
 }
