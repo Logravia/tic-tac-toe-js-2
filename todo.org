@@ -1,5 +1,5 @@
 * Inbox
-** TODO Make gameboard module
+** DONE Make gameboard module
 *** DONE 2d array
 *** DONE Ability to put symbols in 2d array
 *** DONE Return board state
@@ -10,11 +10,11 @@
 *** DONE Refresh browser grid
 *** TODO Inform of victory/loss/score
 ** TODO Make game module
-*** TODO Contains main gameloop
-*** TODO Handles bot game and player driven game through events
+*** DONE Contains main gameloop
+*** DONE Handles bot game and player driven game through events
 *** TODO PvP, PvAI, AIvAI
-** TODO Create player factory
-*** TODO Contains symbol?
-** TODO Create bot factory
-*** TODO Contains choice making logic
-*** TODO Random legal move making logic
+** DONE Create player factory
+*** DONE Contains symbol?
+** DONE Create bot factory
+*** DONE Contains choice making logic
+*** DONE Random legal move making logic
