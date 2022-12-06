@@ -112,6 +112,25 @@ const Player = function(name, symbol, human=true, score=0) {
   return {name, symbol, human, score}
 }
 
+const AI = function(board, botname="HAL9000", botsymbol="Ω"){
+  const {name, symbol, human, score} = Player(botname, botsymbol, false)
+
+  const randInt = function(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+  const makeMove = function () {
+    while (true) {
+      let x = randInt(0,3);
+      let y = randInt(0,3);
+      if (board.isLegal(x,y)) {return {x: x, y:y}};
+      if (board.isTie()) {return}; // accidental loop prevention
+    }
+  }
+
+
+  return {name, symbol, human, score, makeMove}
+}
+
 
 const controls = (function (game) {
   const squares = document.querySelectorAll(".square");
