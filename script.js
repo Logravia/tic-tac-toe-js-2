@@ -108,3 +108,20 @@ const display = (function(board){
 })(board);
 
 display.drawGrid();
+
+const controls = (function (game) {
+  const squares = document.querySelectorAll(".square");
+
+  const addListeners = function () {
+    squares.forEach(square=>{
+      square.addEventListener('click', (event)=>{
+        let x = Number(event.currentTarget.getAttribute("x"));
+        let y = Number(event.currentTarget.getAttribute("y"));
+        game.handleClick(x,y, event.currentTarget)
+      })
+    })
+  };
+
+  addListeners();
+  return {addListeners}
+})(game);
