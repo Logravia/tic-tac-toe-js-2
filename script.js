@@ -131,6 +131,36 @@ const AI = function(board, botname="HAL9000", botsymbol="Ω"){
   return {name, symbol, human, score, makeMove}
 }
 
+const game = (function (board, display) {
+
+  let player_one = Player("John", "X");
+  let player_two = AI(board);
+  let cur_player = player_one;
+
+  const switchPlayers = function() {
+    cur_player = cur_player === player_one ? player_two : player_one;
+  }
+
+  const handleClick = function (x,y, square) {
+    board.putSymbol(cur_player.symbol, x, y);
+    display.updateSquares();
+    switchPlayers()
+
+    if (!cur_player.human) {
+      let ai_choice = cur_player.makeMove();
+      board.putSymbol(cur_player.symbol, ai_choice.x, ai_choice.y);
+      display.updateSquares();
+      if (board.isVictory() || board.isTie()) {
+        console.log("game ended")
+        return;
+      }//TODO
+      switchPlayers();
+    }
+
+  }
+
+  return {handleClick}
+})(board, display)
 
 const controls = (function (game) {
   const squares = document.querySelectorAll(".square");
