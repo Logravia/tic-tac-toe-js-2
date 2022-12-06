@@ -1,0 +1,21 @@
+* Inbox
+** TODO Make gameboard module
+*** TODO 2d array
+*** TODO Ability to put symbols in 2d array
+*** TODO Check for victory, return victor
+*** TODO Return board state
+*** TODO Check board state
+** TODO Make display module
+*** TODO Loop through 2D array, and set grid text content
+*** TODO Generate grid with x,y ids
+*** TODO Refresh browser grid
+*** TODO Inform of victory/loss/score
+** TODO Make game module
+*** TODO Contains main gameloop
+*** TODO Handles bot game and player driven game through events
+*** TODO PvP, PvAI, AIvAI
+** TODO Create player factory
+*** TODO Contains symbol?
+** TODO Create bot factory
+*** TODO Contains choice making logic
+*** TODO Random legal move making logic
