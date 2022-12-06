@@ -1,14 +1,13 @@
 * Inbox
 ** TODO Make gameboard module
-*** TODO 2d array
-*** TODO Ability to put symbols in 2d array
-*** TODO Check for victory, return victor
-*** TODO Return board state
-*** TODO Check board state
+*** DONE 2d array
+*** DONE Ability to put symbols in 2d array
+*** DONE Return board state
+*** DONE Check board state
 ** TODO Make display module
-*** TODO Loop through 2D array, and set grid text content
-*** TODO Generate grid with x,y ids
-*** TODO Refresh browser grid
+*** DONE Loop through 2D array, and set grid text content
+*** DONE Generate grid with x,y ids
+*** DONE Refresh browser grid
 *** TODO Inform of victory/loss/score
 ** TODO Make game module
 *** TODO Contains main gameloop
