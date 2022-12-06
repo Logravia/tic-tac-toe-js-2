@@ -1,14 +1,14 @@
 // Updates the state of the gameboard and informs you of the state it is in
 // E.g. whether move is legal, where the tokens are places
 // and whether victory or tie been achieved
-const gameBoard = (function () {
+const board = (function () {
   const generateBoard = function () {
-    return [[null, null, null],
+    return [["X", null, null],
     [null, null, null],
     [null, null, null]];
   }
 
-  let board = generateBoard()
+  let state = generateBoard()
 
   const x_max = 2;
   const y_max = 2;
@@ -22,7 +22,7 @@ const gameBoard = (function () {
       console.log("Outside of bounds!")
       return false;
     }
-    if (board[y][x] !== null) {
+    if (state[y][x] !== null) {
       console.log("Place taken!");
       return false;
     }
@@ -31,12 +31,12 @@ const gameBoard = (function () {
 
   let putSymbol = function (symbol, x, y) {
     if (isLegal(x,y)){
-      board[y][x] = symbol;
+      state[y][x] = symbol;
     }
   }
 
   clear = function () {
-    board = generateBoard();
+    state = generateBoard();
   }
 
   const allSame = function (arr) {
@@ -48,7 +48,7 @@ const gameBoard = (function () {
   }
 
   const noBlanks = function () {
-    return board.every(row=>noNullFoundIn(row));
+    return state.every(row=>noNullFoundIn(row));
   }
 
   // turns rown into columns
@@ -63,23 +63,48 @@ const gameBoard = (function () {
   };
 
   const checkVerticalWin = function () {
-    let rotatedBoard = transpose(board);
+    let rotatedBoard = transpose(state);
     return checkHorizontalWin(rotatedBoard);
   }
 
   const checkDiagonalWin = function () {
-    leftDiag = [board[0][0],board[1][1], board[2][2]];
-    rightDiag = [board[0][2], board[1][1], board[2][0]];
+    leftDiag = [state[0][0],state[1][1], state[2][2]];
+    rightDiag = [state[0][2], state[1][1], state[2][0]];
     return checkHorizontalWin([leftDiag,rightDiag]);
   }
 
   const isVictory = function () {
-    return checkHorizontalWin(board) || checkVerticalWin() || checkDiagonalWin()
+    return checkHorizontalWin(state) || checkVerticalWin() || checkDiagonalWin()
   }
 
   const isTie = function () {
     return noBlanks() && !isVictory();
   };
 
-  return { putSymbol, clear, board, isTie, isVictory}
+  return { putSymbol, clear, state, isTie, isVictory}
 })();
+
+const display = (function(board){
+  htmlGameboard = document.querySelector(".gameboard");
+
+  const drawGrid = function(){
+    for (let y = 0; y < board.state.length; y++) {
+      for (let x = 0; x < board.state[y].length; x++) {
+        sqr = document.createElement("div");
+        sqr.innerHTML = board.state[y][x];
+        sqr.setAttribute("x", x);
+        sqr.setAttribute("y", y);
+        htmlGameboard.appendChild(sqr);
+      }
+    }
+  }
+
+  const clear = function() {
+    htmlGameboard.replaceChildren();
+  }
+
+  return {drawGrid, clear}
+
+})(board);
+
+display.drawGrid();
